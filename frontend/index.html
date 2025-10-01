@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Urban Farming Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🌿 AI Urban Farming Assistant</h1>
+        <p>Upload a picture of a plant leaf to identify diseases and get care advice.</p>
+        
+        <div class="uploader">
+            <input type="file" id="file-input" accept="image/*">
+            <label for="file-input" class="file-label">Choose an Image</label>
+        </div>
+        
+        <div id="image-preview" class="image-preview"></div>
+        
+        <button id="predict-btn" disabled>Diagnose Plant</button>
+        
+        <div id="loader" class="loader" style="display: none;"></div>
+        
+        <div id="result" class="result"></div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
