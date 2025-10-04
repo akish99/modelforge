@@ -835,7 +835,7 @@
     <script>
         // App State (in-memory, will reset on page refresh)
         let currentUser = null;
-        let users = {}; // Store registered users
+        //let users = {}; // Store registered users
         let diagnosisHistory = [];
 
         const API_ENDPOINT = 'http://127.0.0.1:5000/predict';
@@ -870,38 +870,64 @@
         }
 
         // Authentication
-        function handleSignUp(event) {
-            event.preventDefault();
-            const name = document.getElementById('signup-name').value;
-            const email = document.getElementById('signup-email').value;
-            const password = document.getElementById('signup-password').value;
+        async function handleSignUp(event) {
+    event.preventDefault();
 
-            if (users[email]) {
-                alert('This email is already registered. Please sign in.');
-                return;
-            }
+    const name = document.getElementById('signup-name').value;
+    const email = document.getElementById('signup-email').value;
+    const password = document.getElementById('signup-password').value;
 
-            users[email] = { name, email, password };
+    try {
+        const response = await fetch('http://127.0.0.1:5000/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.status === 201) {
             alert('Account created successfully! Please sign in.');
             closeModal('signup-modal');
             showSignIn();
+        } else {
+            alert(data.message || 'Sign-up failed.');
         }
+    } catch (error) {
+        console.error('Signup error:', error);
+        alert('Error connecting to server.');
+    }
+}
 
-        function handleSignIn(event) {
-            event.preventDefault();
-            const email = document.getElementById('signin-email').value;
-            const password = document.getElementById('signin-password').value;
 
-            const user = users[email];
-            if (!user || user.password !== password) {
-                alert('Invalid email or password. Please try again.');
-                return;
-            }
+async function handleSignIn(event) {
+    event.preventDefault();
 
-            currentUser = user;
+    const email = document.getElementById('signin-email').value;
+    const password = document.getElementById('signin-password').value;
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/signin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            currentUser = data;
             closeModal('signin-modal');
             loadDashboard();
+        } else {
+            alert(data.message || 'Invalid credentials.');
         }
+    } catch (error) {
+        console.error('Signin error:', error);
+        alert('Error connecting to server.');
+    }
+}
+
 
         function logout() {
             currentUser = null;
