@@ -833,14 +833,13 @@
     </div>
 
     <script>
-        // App State (in-memory, will reset on page refresh)
+        
         let currentUser = null;
-        //let users = {}; // Store registered users
+        
         let diagnosisHistory = [];
 
         const API_ENDPOINT = 'http://127.0.0.1:5000/predict';
 
-        // View Management
         function showView(viewId) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
