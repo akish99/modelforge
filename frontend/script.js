@@ -1,84 +1,3 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//     const fileInput = document.getElementById('file-input');
-//     const imagePreview = document.getElementById('image-preview');
-//     const predictBtn = document.getElementById('predict-btn');
-//     const resultDiv = document.getElementById('result');
-//     const loader = document.getElementById('loader');
-    
-//     // The URL for your backend's predict endpoint
-//     const API_ENDPOINT = 'http://127.0.0.1:5000/predict';
-
-//     let uploadedFile = null;
-
-//     fileInput.addEventListener('change', (event) => {
-//         const file = event.target.files[0];
-//         if (file) {
-//             uploadedFile = file;
-//             const reader = new FileReader();
-//             reader.onload = (e) => {
-//                 imagePreview.innerHTML = `<img src="${e.target.result}" alt="Image preview"/>`;
-//             };
-//             reader.readAsDataURL(file);
-//             predictBtn.disabled = false;
-//             resultDiv.innerHTML = ''; // Clear previous results
-//         }
-//     });
-
-//     predictBtn.addEventListener('click', () => {
-//         if (!uploadedFile) {
-//             alert('Please select an image first!');
-//             return;
-//         }
-
-//         const formData = new FormData();
-//         formData.append('file', uploadedFile);
-
-//         // Show loader and hide previous results
-//         loader.style.display = 'block';
-//         resultDiv.style.display = 'none';
-//         predictBtn.disabled = true;
-
-//         fetch(API_ENDPOINT, {
-//             method: 'POST',
-//             body: formData,
-//         })
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error(`HTTP error! status: ${response.status}`);
-//             }
-//             return response.json();
-//         })
-//         .then(data => {
-//             displayResult(data);
-//         })
-//         .catch(error => {
-//             console.error('Error:', error);
-//             resultDiv.innerHTML = `<p style="color: red;">An error occurred: ${error.message}. Please ensure the backend server is running.</p>`;
-//         })
-//         .finally(() => {
-//             // Hide loader and re-enable button
-//             loader.style.display = 'none';
-//             resultDiv.style.display = 'block';
-//             predictBtn.disabled = false;
-//         });
-//     });
-
-//     function displayResult(data) {
-//         if (data.error) {
-//             resultDiv.innerHTML = `<p style="color: red;">Error: ${data.error}</p>`;
-//             return;
-//         }
-
-//         resultDiv.innerHTML = `
-//             <h3>Diagnosis Results</h3>
-//             <p><strong>Plant:</strong> ${data.plant}</p>
-//             <p><strong>Health Status:</strong> ${data.disease} (${data.confidence})</p>
-//             <p><strong>Suggested Treatment:</strong> ${data.treatment}</p>
-//             <p><strong>Watering Advice:</strong> ${data.watering_advice}</p>
-//         `;
-//     }
-// });
-
 document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('file-input');
     const imagePreview = document.getElementById('image-preview');
@@ -87,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('loader');
     
     // const API_ENDPOINT = 'http://127.0.0.1:5000/predict';
-    const API_ENDPOINT = 'http://127.0.0.1:5000/predict';
+    const API_ENDPOINT = 'https://modelforge-backend1.onrender.com';
 
     let uploadedFile = null;
 
