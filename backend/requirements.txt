@@ -1,9 +1,3 @@
-# Flask
-# Flask-Cors
-# tensorflow
-# numpy
-# Pillow
-# requests
 
 Flask
 Flask-Cors
